@@ -1,15 +1,14 @@
 <template>
-  <div>
-      这是tabbar页面
+  <div id="tabbar">
+    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
-    name:'tabbar',
-}
+  name: "tabbar"
+};
 </script>
 
 <style>
-
 </style>
