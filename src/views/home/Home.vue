@@ -1,7 +1,7 @@
 <template>
-  <div>
-      这是home页面
-  </div>
+<div>
+  这是home主页
+</div>
 </template>
 
 <script>

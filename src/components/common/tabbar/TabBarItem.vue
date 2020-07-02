@@ -1,6 +1,6 @@
 <template>
-  <div class="tabbarItem">
-      <div v-if="isActive">
+  <div class="tabbaritem" @click="itemClick">
+      <div v-if="!isActive">
         <slot name="item-icon"></slot>
       </div>
       <div v-else>
@@ -14,8 +14,27 @@
 
 <script>
 export default {
-    name:"tabbaritem",
-    props:
+    name:"TabBarItem",
+    props:{
+      path:String,
+      activeColor:{
+        type:String,
+        default:'red'
+      }
+    },
+    methods: {
+      itemClick(){
+        this.$router.push(this.path)
+      }
+    },
+    computed: {
+      isActive(){
+        return this.$route.path.indexOf(this.path)!==-1
+      },
+      activeStyle(){
+        return this.isActive?{color:this.activeColor}:{}
+      }
+    },
 }
 </script>
 

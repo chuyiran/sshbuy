@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-vue.use(Router)
+Vue.use(Router)
 const routes = [{
         path: '/',
         redirect: '/home'
