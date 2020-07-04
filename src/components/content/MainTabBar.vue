@@ -47,6 +47,8 @@ export default {
   right: 0px;
   background-color: #f6f6f6;
   box-shadow: 0 -1px 2px rgb(233, 225, 225);
+  width: 100%;
+  z-index: 10;
 }
 .tabbaritem{
     flex: 1;
