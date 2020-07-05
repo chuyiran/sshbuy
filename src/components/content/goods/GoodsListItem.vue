@@ -39,6 +39,7 @@ export default {
         bottom: 5px;
         left: 0;right: 0;
         text-align: center;
+        font-size: 15px;
     }
     .goods-info p{
         overflow: hidden;
