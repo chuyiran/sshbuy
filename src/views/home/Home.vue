@@ -3,42 +3,13 @@
     <navbar class="home-navbar">
       <div slot="center">购物街</div>
     </navbar>
-    <home-swiper :banners="banners"></home-swiper>
-    <recommends :recommends="recommend" />
-    <feature />
-    <tabcontrol class="tab-control" :titles="['流行','新款','精选']" @tabChange="tabChange" />
-    <goodslist :goodsListItem="goods[currentType].list"></goodslist>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <scroll class="content">
+      <home-swiper :banners="banners"></home-swiper>
+      <recommends :recommends="recommend" />
+      <feature />
+      <tabcontrol class="tab-control" :titles="['流行','新款','精选']" @tabChange="tabChange" />
+      <goodslist :goodsListItem="goods[currentType].list"></goodslist>
+    </scroll>
     <br />
     <br />
   </div>
@@ -52,6 +23,7 @@ import recommends from "./childComponents/HomeRecommend";
 import Feature from "./childComponents/Feature";
 import tabcontrol from "components/content/TabControl";
 import goodslist from "components/content/goods/GoodsList";
+import scroll from 'components/common/scroll/Scroll'
 export default {
   name: "home",
   components: {
@@ -60,7 +32,8 @@ export default {
     recommends,
     Feature,
     tabcontrol,
-    goodslist
+    goodslist,
+    scroll
   },
   data() {
     return {
@@ -120,9 +93,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #home {
   padding-top: 44px;
+  position:relative;
 }
 .home-navbar {
   background-color: var(--color-tint);
@@ -140,4 +114,17 @@ export default {
   top: 44px;
   background-color: #f6f6f6;
 }
+.content{
+  position:absolute;
+  top: 44px;
+  bottom: 54px;
+  left: 0px;
+  right: 0px;
+}
+
+/* .content{
+  height: calc(100%993px);
+  height: 300px; 
+  overflow: hidden;
+}  */
 </style>

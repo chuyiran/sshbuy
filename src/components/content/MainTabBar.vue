@@ -48,19 +48,20 @@ export default {
   background-color: #f6f6f6;
   box-shadow: 0 -1px 2px rgb(233, 225, 225);
   width: 100%;
-  z-index: 10;
+  z-index: 99;
 }
 .tabbaritem{
     flex: 1;
     text-align: center;
     height: 49px;
     /* vertical-align: middle; */
-    margin-top: 5px;
     font-size: 14px;
+    padding-top: 3px;
 }
 .tabbaritem img{
     width: 25px;
     height: 25px;
     vertical-align: middle;
+    padding-bottom: 2px;
 }
 </style>
