@@ -15,11 +15,30 @@ export default {
             bscroll:null
         }
     },
+    props:{
+        probeType:{
+            type:Number,
+            default:1
+        }
+    },
     mounted() {
+            //1.创建scroll对象
         this.bscroll=new BScroll(this.$refs.wrapper,{
             click:true,
-            probeType:2
+            probeType:this.probeType
         })
+            //2.监听滚动位置
+        this.bscroll.on('scroll',(position)=>{
+            // console.log(position.y);
+            this.$emit('scroll',position)
+        })
+
+        
+    },
+    methods: {
+        backTo(x,y,time=1000){
+            this.bscroll.scrollTo(x,y,time)
+        }
     },
 }
 </script>

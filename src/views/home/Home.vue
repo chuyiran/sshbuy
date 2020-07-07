@@ -3,7 +3,7 @@
     <navbar class="home-navbar">
       <div slot="center">购物街</div>
     </navbar>
-    <scroll class="content">
+    <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType='probeType' >
       <home-swiper :banners="banners"></home-swiper>
       <recommends :recommends="recommend" />
       <feature />
@@ -12,6 +12,7 @@
     </scroll>
     <br />
     <br />
+    <backto class="backto" @click.native='backToClick' v-show="isShowBackTop"/>
   </div>
 </template>
 
@@ -24,6 +25,7 @@ import Feature from "./childComponents/Feature";
 import tabcontrol from "components/content/TabControl";
 import goodslist from "components/content/goods/GoodsList";
 import scroll from 'components/common/scroll/Scroll'
+import backto from 'components/content/backTo/BackTo'
 export default {
   name: "home",
   components: {
@@ -33,7 +35,8 @@ export default {
     Feature,
     tabcontrol,
     goodslist,
-    scroll
+    scroll,
+    backto
   },
   data() {
     return {
@@ -44,7 +47,9 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] }
       },
-      currentType: "pop"
+      currentType: "pop",
+      probeType:2,
+      isShowBackTop:false
     };
   },
   created() {
@@ -88,6 +93,16 @@ export default {
           this.currentType = "sell";
           break;
       }
+    },
+    //返回顶部
+    backToClick(){
+      console.log('aaa');
+      this.$refs.scroll.backTo(0,0,1000)
+    },
+    //根据位置来判断是否显示backTop
+    contentScroll(position){
+      // console.log(position);
+      this.isShowBackTop=(-position.y)>1000
     }
   }
 };
@@ -121,9 +136,13 @@ export default {
   left: 0px;
   right: 0px;
 }
-
+.backto{
+  position:fixed;
+  bottom: 50px;
+  right: 10px;
+}
 /* .content{
-  height: calc(100%993px);
+  height: calc(100%-993px);
   height: 300px; 
   overflow: hidden;
 }  */
