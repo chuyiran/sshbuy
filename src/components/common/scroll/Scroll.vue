@@ -19,6 +19,10 @@ export default {
         probeType:{
             type:Number,
             default:1
+        },
+        pullUpLoad:{
+            type:Boolean,
+            default:false
         }
     },
     mounted() {
@@ -30,10 +34,12 @@ export default {
             //2.监听滚动位置
         this.bscroll.on('scroll',(position)=>{
             // console.log(position.y);
-            this.$emit('scroll',position)
+            this.$emit('contentScroll',position)
         })
-
-        
+            //3.监听上拉事件
+        this.bscroll.on('pullingUp',()=>{
+            this.$emit('pullingUp');
+        })
     },
     methods: {
         backTo(x,y,time=1000){

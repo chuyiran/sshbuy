@@ -3,15 +3,17 @@
     <navbar class="home-navbar">
       <div slot="center">购物街</div>
     </navbar>
-    <scroll class="content" ref="scroll" @scroll="contentScroll" :probeType='probeType' >
+    <scroll class="content" 
+    ref="scroll" 
+    @contentScroll="contentScroll" 
+    @pullingUp="loadMore" :pullUpLoad='true'
+    :probeType='3'>
       <home-swiper :banners="banners"></home-swiper>
       <recommends :recommends="recommend" />
       <feature />
       <tabcontrol class="tab-control" :titles="['流行','新款','精选']" @tabChange="tabChange" />
       <goodslist :goodsListItem="goods[currentType].list"></goodslist>
     </scroll>
-    <br />
-    <br />
     <backto class="backto" @click.native='backToClick' v-show="isShowBackTop"/>
   </div>
 </template>
@@ -63,6 +65,10 @@ export default {
     this.getHomeGoods("sell"); //获取首页商品信息数据
     this.getHomeGoods("new");
     this.getHomeGoods("pop");
+    this.$bus.$on("itemImgLoad",()=>{
+      // console.log('---------')
+      this.$refs.scroll.bscroll.refresh()
+    })
   },
   methods: {
     //#region 网络请求方法
@@ -77,6 +83,7 @@ export default {
       getHomeGoods(type, page).then(res => {
         this.goods[type].list.push(...res.data.list); //将type类型list添加到goods中的list中
         this.goods[type].page += 1; //goods中page页数累加1
+        this.$refs.scroll.bscroll.finishPullUp();
       });
     },
     //#endregion
@@ -103,6 +110,11 @@ export default {
     contentScroll(position){
       // console.log(position);
       this.isShowBackTop=(-position.y)>1000
+    },
+    loadMore(){
+      console.log('上拉加载中')
+      this.getHomeGoods(this.currentType)
+      this.$refs.scroll.bscroll.refresh();
     }
   }
 };
@@ -110,6 +122,7 @@ export default {
 
 <style scoped>
 #home {
+  height: 100vh;
   padding-top: 44px;
   position:relative;
 }
@@ -135,6 +148,7 @@ export default {
   bottom: 54px;
   left: 0px;
   right: 0px;
+  overflow: hidden;
 }
 .backto{
   position:fixed;
@@ -142,7 +156,7 @@ export default {
   right: 10px;
 }
 /* .content{
-  height: calc(100%-993px);
+  height: calc(100%-93px);
   height: 300px; 
   overflow: hidden;
 }  */
