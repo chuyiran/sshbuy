@@ -43,7 +43,14 @@ export default {
     },
     methods: {
         backTo(x,y,time=1000){
-            this.bscroll.scrollTo(x,y,time)
+           this.bscroll && this.bscroll.scrollTo(x,y,time)
+        },
+        finishPullUp(){
+            this.bscroll.finishPullUp();
+        },
+        refreshPullUp(){
+            // console.log('----------');
+            this.bscroll &&  this.bscroll.refresh()
         }
     },
 }
